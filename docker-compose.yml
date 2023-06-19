@@ -17,6 +17,8 @@ services:
     environment:
       - MONGODB_SERVICE=mongodb
       - MONGODB_PORT=27017
+      - MONGODB_USERNAME = %{MONGODB_USERNAME}
+      - MONGODB_PASSWORD = %{MONGODB_PASSWORD}
 
   capstone:
     build:
