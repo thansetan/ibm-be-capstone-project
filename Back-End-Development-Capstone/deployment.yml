@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: djangoserver
+  name: djangoserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: djangoserver
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: djangoserver
+    spec:
+      containers:
+      - image: # image url
+        imagePullPolicy: Always
+        name: djangoserver
+        ports:
+        - containerPort: # port number
+          protocol: TCP
+      restartPolicy: Always

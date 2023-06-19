@@ -1,0 +1,28 @@
+version: '1'
+
+services:
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+    
+  pictures:
+    build:
+      context: ./Back-End-Development-Pictures
+
+  songs:
+    build:
+      context: ./Back-End-Development-Songs
+    environment:
+      - MONGODB_SERVICE=mongodb
+      - MONGODB_PORT=27017
+
+  capstone:
+    build:
+      context: ./Back-End-Development-Capstone
+    ports:
+      - 8000:8000
+    environment:
+      - PHOTOS_SERVICE_URL=http://pictures:3000/picture
+      - SONGS_SERVICE_URL=http://songs:3001/song
